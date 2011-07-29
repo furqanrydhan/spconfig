@@ -9,7 +9,7 @@ def setup():
         version='0.1',
         description='StylePage tools: Python configuration',
         author='mattbornski',
-        url='http://github.com/mattbornski/spconfig',
+        url='http://github.com/stylepage/spconfig',
         package_dir={'': 'src'},
         py_modules=[
             'spconfig',

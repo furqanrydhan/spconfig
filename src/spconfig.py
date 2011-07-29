@@ -1,7 +1,5 @@
 #!/usr/bin/env python
 
-__author__ = 'mattborn'
-
 import ConfigParser
 import optparse
 import os
