@@ -1,20 +1,15 @@
 #!/usr/bin/env python
 
+__version_info__ = (0, 1, 2)
+__version__ = '.'.join([str(i) for i in __version_info__])
+version = __version__
+
 import ConfigParser
 import optparse
 import os
 import os.path
 import sys
 import traceback
-
-
-
-try:
-    from _version import __version_info__, __version__, version
-except ImportError:
-    pass
-
-
 
 # Search the directory of the caller's file, or the cwd, or the root directory, for config files.
 def configuration(**kwargs):
