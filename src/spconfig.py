@@ -7,6 +7,15 @@ import os.path
 import sys
 import traceback
 
+
+
+try:
+    from _version import __version_info__, __version__, version
+except ImportError:
+    pass
+
+
+
 # Search the directory of the caller's file, or the cwd, or the root directory, for config files.
 def configuration(**kwargs):
     defaults = {
