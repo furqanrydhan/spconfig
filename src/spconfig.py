@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-__version_info__ = (0, 1, 2)
+__version_info__ = (0, 1, 3)
 __version__ = '.'.join([str(i) for i in __version_info__])
 version = __version__
 
@@ -10,6 +10,15 @@ import os
 import os.path
 import sys
 import traceback
+
+class clparser(optparse.OptionParser):
+    def __init__(self, *args, **kwargs):
+        optparse.OptionParser.__init__(self, *args, **kwargs)
+        self.add_option('--root', action='store', type='string', dest='root', help='Specify the directory to search for config files')
+        self.add_option('--role', action='store', type='string', dest='role', help='Specify running role, typically one of "prod", "dev", or "local" [default]')
+        self.add_option('--config', action='store', type='string', dest='config', help='Use CONFIG instead of any other config files found')
+    def error(self, msg):
+        pass
 
 # Search the directory of the caller's file, or the cwd, or the root directory, for config files.
 def configuration(**kwargs):
@@ -31,10 +40,7 @@ def configuration(**kwargs):
     spec = dict(defaults)
     spec.update(kwargs)
     # Check if a role was specified, or an explicit config file given.
-    parser = optparse.OptionParser()
-    parser.add_option('--root', action='store', type='string', dest='root', help='Specify the directory to search for config files')
-    parser.add_option('--role', action='store', type='string', dest='role', help='Specify running role, typically one of "prod", "dev", or "local" [default]')
-    parser.add_option('--config', action='store', type='string', dest='config', help='Use CONFIG instead of any other config files found')
+    parser = clparser()
     class attrdict(dict):
         def __setattr__(self, key, value):
             return self.__setitem__(key, value)
